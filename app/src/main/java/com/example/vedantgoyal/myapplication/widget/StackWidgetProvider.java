@@ -1,4 +1,4 @@
-package com.example.vedantgoyal.myapplication;
+package com.example.vedantgoyal.myapplication.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
+import com.example.vedantgoyal.myapplication.R;
 
 public class StackWidgetProvider extends AppWidgetProvider {
     public static final String TOAST_ACTION = "com.example.android.stackwidget.TOAST_ACTION";

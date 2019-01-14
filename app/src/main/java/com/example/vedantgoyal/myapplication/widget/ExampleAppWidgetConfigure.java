@@ -1,4 +1,4 @@
-package com.example.vedantgoyal.myapplication;
+package com.example.vedantgoyal.myapplication.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.vedantgoyal.myapplication.R;
+
 import java.util.ArrayList;
 
 public class ExampleAppWidgetConfigure extends Activity {
     static final String TAG = "ExampleAppWidgetConfigure";
     private static final String PREFS_NAME
-            = "com.example.vedantgoyal.myapplication.ExampleAppWidgetProvider";
+            = "com.example.vedantgoyal.myapplication.widget.ExampleAppWidgetProvider";
     private static final String PREF_PREFIX_KEY = "prefix_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetPrefix;
@@ -65,14 +67,14 @@ public class ExampleAppWidgetConfigure extends Activity {
         }
     };
     // Write the prefix to the SharedPreferences object for this widget
-    static void saveTitlePref(Context context, int appWidgetId, String text) {
+    public static void saveTitlePref(Context context, int appWidgetId, String text) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
         prefs.commit();
     }
     // Read the prefix from the SharedPreferences object for this widget.
     // If there is no preference saved, get the default from a resource
-    static String loadTitlePref(Context context, int appWidgetId) {
+    public static String loadTitlePref(Context context, int appWidgetId) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
         String prefix = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
         if (prefix != null) {

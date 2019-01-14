@@ -1,13 +1,18 @@
 package com.example.vedantgoyal.myapplication;
 
-import android.arch.lifecycle.LifecycleObserver;
+import  android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.vedantgoyal.myapplication.ataBinding.User;
+import com.example.vedantgoyal.myapplication.databinding.ActivityMainBinding;
 import com.example.vedantgoyal.myapplication.fragment.ExampleFragm;
 import com.example.vedantgoyal.myapplication.fragment.ExampleFragment;
 
@@ -37,13 +45,18 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
     Uri uri= Uri.parse("content://contacts/");
     static final int PICK_CONTACT_REQUEST = 0;
     Boolean mSwitch=true;
+    private MyHandlers handlers;
+    private NameViewModel mModel;
 
     // some transient state for the activity instance
     int mGameState=0;
+    ActivityMainBinding mBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        User user = new User("Test", "User");
+        mBinding.setUser(user);
         editText = findViewById(R.id.editText);
         mTextView = (TextView) findViewById(R.id.textView);
 
@@ -54,16 +67,27 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
             mTextView.setText(mGameState+"");
 
         }
+        getLifecycle().addObserver(new MyLocationListener());
+//        get the view model
+        mModel=ViewModelProviders.of(this).get(NameViewModel.class);
+//        create the observer which updates the ui
+        android.arch.lifecycle.Observer<String> nameObserver=new android.arch.lifecycle.Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                mTextView.setText(s);
+            }
+        };
+        mModel.getCurrentName().observe(this,nameObserver );
+        handlers=new MyHandlers(this);
 
-
+        mBinding.setHandlers(handlers);
 
     }
 
     public void sendMessage(View view) {
 
-        Intent intent=new Intent(this,DisplayMessageActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        startActivity(intent);
+        String anotherName = "John Doe";
+        mModel.getCurrentName().setValue(anotherName);
 
     }
     @Override
@@ -121,7 +145,20 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
         // All other menu item clicks are handled by <code><a href="/reference/android/app/Activity.html#onOptionsItemSelected(android.view.MenuItem)">onOptionsItemSelected()</a></code>
     }
 
+    public class MyHandlers {
+        private Context context;
 
+        public MyHandlers(Context context) {
+            this.context = context;
+        }
+
+        public void onClickFriend(View view) {
+            Toast.makeText(context,"" ,Toast.LENGTH_LONG ).show();
+            Log.i("button1", "onClickFriend: ");
+
+        }
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
 

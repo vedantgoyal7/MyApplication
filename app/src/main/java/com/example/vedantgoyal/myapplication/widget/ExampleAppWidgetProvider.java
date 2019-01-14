@@ -1,4 +1,4 @@
-package com.example.vedantgoyal.myapplication;
+package com.example.vedantgoyal.myapplication.widget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,6 +8,10 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.example.vedantgoyal.myapplication.DisplayMessageActivity;
+import com.example.vedantgoyal.myapplication.R;
+import com.example.vedantgoyal.myapplication.widget.ExampleAppWidgetConfigure;
 
 import static com.example.vedantgoyal.myapplication.MainActivity.TAG;
 
@@ -32,7 +36,7 @@ public class ExampleAppWidgetProvider extends AppWidgetProvider {
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-    }static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    }public static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                  int appWidgetId, String titlePrefix) {
         Log.d(TAG, "updateAppWidget appWidgetId=" + appWidgetId + " titlePrefix=" + titlePrefix);
         // Getting the string this way allows the string to be localized.  The format

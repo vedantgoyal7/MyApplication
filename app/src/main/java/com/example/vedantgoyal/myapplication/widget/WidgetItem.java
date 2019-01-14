@@ -1,4 +1,4 @@
-package com.example.vedantgoyal.myapplication;
+package com.example.vedantgoyal.myapplication.widget;
 
 public class WidgetItem {
     public String text;

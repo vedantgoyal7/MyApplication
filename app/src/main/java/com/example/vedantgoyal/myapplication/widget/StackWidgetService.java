@@ -1,4 +1,4 @@
-package com.example.vedantgoyal.myapplication;
+package com.example.vedantgoyal.myapplication.widget;
 import java.util.ArrayList;
 import java.util.List;
 import android.appwidget.AppWidgetManager;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import com.example.vedantgoyal.myapplication.R;
 
 public class StackWidgetService extends RemoteViewsService {
     @Override

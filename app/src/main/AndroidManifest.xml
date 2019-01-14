@@ -44,26 +44,26 @@
         <activity android:name=".Main2Activity">
 
         </activity>
-        <activity android:name=".ExampleAppWidgetConfigure">
+        <activity android:name=".widget.ExampleAppWidgetConfigure">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
-        <receiver android:name="ExampleAppWidgetProvider" >
+        <receiver android:name=".widget.ExampleAppWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/example_appwidget_info" />
         </receiver>
-        <receiver android:name="StackWidgetProvider">
+        <receiver android:name=".widget.StackWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/stackwidgetinfo" />
         </receiver>
-        <service android:name="StackWidgetService"
+        <service android:name=".widget.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"
             android:exported="false" />
     </application>
